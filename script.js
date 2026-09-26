@@ -1,4 +1,14 @@
+let cartCount = 0;
+
 function addToCart() {
-    document.getElementById("message").innerText =
-        "Product added to cart!";
+    cartCount++;
+    document.getElementById("cartCount").innerText = cartCount;
+
+    alert("Product added to cart!");
+}
+
+function scrollToProducts() {
+    document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+    });
 }

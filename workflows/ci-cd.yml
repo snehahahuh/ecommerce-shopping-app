@@ -1,0 +1,41 @@
+name: E-Commerce CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Test Application Files
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f script.js
+          echo "All application files are present."
+
+      - name: Build Application
+        run: |
+          mkdir build
+          cp index.html style.css script.js build/
+          echo "Build completed successfully."
+
+      - name: Package Application
+        run: |
+          zip -r ecommerce-shopping-app.zip build
+          echo "Package created successfully."
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ecommerce-shopping-app
+          path: ecommerce-shopping-app.zip
